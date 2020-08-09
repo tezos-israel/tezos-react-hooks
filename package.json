@@ -1,0 +1,11 @@
+{
+  "name": "tezos-hooks",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "peerDependencies": {
+    "@taquito/beacon-wallet": "^6.3.5-beta.0",
+    "@taquito/taquito": "^6.3.5-beta.0",
+    "react": "^16.13.1"
+  }
+}
