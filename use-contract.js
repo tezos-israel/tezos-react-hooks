@@ -36,6 +36,7 @@ export function useContract() {
     if (!contractAddress) {
       return;
     }
+    clearError();
     setLoading(true);
     try {
       const contractInstance = await tezos.wallet.at(contractAddress);
