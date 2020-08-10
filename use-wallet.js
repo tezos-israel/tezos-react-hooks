@@ -1,14 +1,26 @@
 import { useState } from "react";
-import { Tezos } from "@taquito/taquito";
 import { BeaconWallet } from "@taquito/beacon-wallet";
 
+import { useTezosContext } from "./TezosContext";
+import { useBalanceState } from "./use-balance-state";
+
 export function useWallet() {
+  const { tezos } = useTezosContext();
   const [initialized, setInit] = useState(false);
   const [address, setAddress] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const balanceState = useBalanceState(address);
 
-  return { initialized, address, error, loading, connect, clearError };
+  return {
+    initialized,
+    address,
+    error: error || balanceState.error,
+    loading: loading || balanceState.loading,
+    connect,
+    balance: balanceState.balance,
+    clearErrors,
+  };
 
   async function connect() {
     try {
@@ -23,19 +35,19 @@ export function useWallet() {
     }
   }
 
-  function clearError() {
+  function clearErrors() {
     setError("");
+    balanceState.clearError();
   }
 
   async function initWallet() {
-    Tezos.setProvider({ rpc: "https://carthagenet.SmartPy.io" });
     const options = {
       name: "Tezos counter app",
     };
     const wallet = new BeaconWallet(options);
     const network = { type: "carthagenet" };
     await wallet.requestPermissions({ network });
-    Tezos.setWalletProvider(wallet);
+    tezos.setWalletProvider(wallet);
 
     const address = wallet.permissions.address;
     return { address };

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { Tezos } from "@taquito/taquito";
+import { useTezosContext } from "./TezosContext";
 
 export function useBalanceState(address = "", contractOperationsCount = 0) {
+  const { tezos } = useTezosContext();
   const [balance, setBalance] = useState(0);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,7 +23,7 @@ export function useBalanceState(address = "", contractOperationsCount = 0) {
     }
     try {
       setLoading(true);
-      const balance = await Tezos.tz.getBalance(address);
+      const balance = await tezos.tz.getBalance(address);
       setBalance(balance / 10 ** 6);
     } catch (e) {
       setError(e.message);
