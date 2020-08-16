@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useTezosContext } from "./TezosContext";
 
-export function useContract() {
+export function useContract(contractAddress) {
   const { tezos } = useTezosContext();
   const [contract, setContract] = useState(null);
   const [error, setError] = useState("");
@@ -12,6 +12,10 @@ export function useContract() {
   useEffect(() => {
     loadStorage(contract);
   }, [contract, operationsCount]);
+
+  useEffect(() => {
+    connect(contractAddress);
+  }, [contractAddress]);
 
   return {
     contract,
@@ -32,7 +36,7 @@ export function useContract() {
     setOperationsCounter(operationsCount + 1);
   }
 
-  async function connect(contractAddress) {
+  async function connect() {
     if (!contractAddress) {
       return;
     }
