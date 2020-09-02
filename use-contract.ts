@@ -4,7 +4,10 @@ import { ContractHook, State } from "./types";
 import { WalletContract } from "@taquito/taquito";
 import { validateAddress } from "@taquito/utils";
 
-export function useContract(contractAddress: string): ContractHook {
+export function useContract(
+  contractAddress: string,
+  refreshInterval?: number
+): ContractHook {
   const { tezos }: State = useTezosContext();
   const [contract, setContract] = useState<WalletContract>();
   const [error, setError] = useState<string>();
@@ -18,7 +21,10 @@ export function useContract(contractAddress: string): ContractHook {
     loadStorage(contract);
     clearInterval(refreshStorageInterval);
     // sets interval
-    const interval = setInterval(async () => loadStorage(contract), 6000);
+    const interval = setInterval(
+      async () => loadStorage(contract),
+      refreshInterval || 60000
+    );
     setRefreshStorageInterval(interval);
     return () => {
       clearInterval(refreshStorageInterval);
@@ -63,7 +69,6 @@ export function useContract(contractAddress: string): ContractHook {
   }
 
   async function loadStorage(contract) {
-    console.log(contract);
     if (!contract) {
       return;
     }
