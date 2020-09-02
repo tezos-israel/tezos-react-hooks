@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { useTezosContext } from "./TezosContext";
 import { ContractHook, State } from "./types";
-import { ContractAbstraction, Wallet } from "@taquito/taquito";
+import { WalletContract } from "@taquito/taquito";
+import { validateAddress } from "@taquito/utils";
 
 export function useContract(contractAddress: string): ContractHook {
   const { tezos }: State = useTezosContext();
-  const [contract, setContract] = useState<ContractAbstraction<Wallet>>();
+  const [contract, setContract] = useState<WalletContract>();
   const [error, setError] = useState<string>();
-  const [storage, setStorage] = useState(0);
+  const [storage, setStorage] = useState();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -15,7 +16,9 @@ export function useContract(contractAddress: string): ContractHook {
   }, [contract]);
 
   useEffect(() => {
-    connect();
+    if (validateAddress(contractAddress) === 3) {
+      connect();
+    }
   }, [contractAddress]);
 
   return {
@@ -32,9 +35,6 @@ export function useContract(contractAddress: string): ContractHook {
   }
 
   async function connect() {
-    if (!contractAddress) {
-      return;
-    }
     if (!tezos) {
       setError("No Tezos provider");
       return;
