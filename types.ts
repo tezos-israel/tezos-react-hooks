@@ -32,3 +32,11 @@ export interface BeaconWalletHook {
   balance: number;
   clearErrors: () => void;
 }
+
+export interface BalanceHook {
+  balance: number;
+  error: string;
+  loading: boolean;
+  clearError: () => void;
+  balanceInTez: () => number;
+}

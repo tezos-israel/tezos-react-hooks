@@ -10,9 +10,19 @@ export function useContract(contractAddress: string): ContractHook {
   const [error, setError] = useState<string>();
   const [storage, setStorage] = useState();
   const [loading, setLoading] = useState(false);
+  const [refreshStorageInterval, setRefreshStorageInterval] = useState(
+    undefined
+  );
 
   useEffect(() => {
     loadStorage(contract);
+    clearInterval(refreshStorageInterval);
+    // sets interval
+    const interval = setInterval(async () => loadStorage(contract), 6000);
+    setRefreshStorageInterval(interval);
+    return () => {
+      clearInterval(refreshStorageInterval);
+    };
   }, [contract]);
 
   useEffect(() => {
@@ -53,6 +63,7 @@ export function useContract(contractAddress: string): ContractHook {
   }
 
   async function loadStorage(contract) {
+    console.log(contract);
     if (!contract) {
       return;
     }

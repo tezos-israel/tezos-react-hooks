@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { useTezosContext } from "./TezosContext";
+import { BalanceHook } from "./types";
+import BigNumber from "bignumber.js";
 
-export function useBalance(address: string = "") {
+export function useBalance(address: string = ""): BalanceHook {
   const { tezos } = useTezosContext();
-  const [balance, setBalance] = useState();
+  const [balance, setBalance]: [number, (p: number) => void] = useState();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -23,13 +25,13 @@ export function useBalance(address: string = "") {
     return balance / 10 ** 6;
   }
 
-  async function loadBalance(address) {
+  async function loadBalance(address: string) {
     if (!address) {
       return;
     }
     try {
       setLoading(true);
-      const balance = await tezos.tz.getBalance(address);
+      const balance: BigNumber = await tezos.tz.getBalance(address);
       setBalance(balance.toNumber());
     } catch (e) {
       setError(e.message);
