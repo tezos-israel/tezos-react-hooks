@@ -1,20 +1,21 @@
 import { useState, useEffect } from "react";
 import { useTezosContext } from "./TezosContext";
+import { ContractHook, State } from "./types";
+import { ContractAbstraction, Wallet } from "@taquito/taquito";
 
-export function useContract(contractAddress) {
-  const { tezos } = useTezosContext();
-  const [contract, setContract] = useState(null);
-  const [error, setError] = useState("");
+export function useContract(contractAddress: string): ContractHook {
+  const { tezos }: State = useTezosContext();
+  const [contract, setContract] = useState<ContractAbstraction<Wallet>>();
+  const [error, setError] = useState<string>();
   const [storage, setStorage] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [operationsCount, setOperationsCounter] = useState(0);
 
   useEffect(() => {
     loadStorage(contract);
-  }, [contract, operationsCount]);
+  }, [contract]);
 
   useEffect(() => {
-    connect(contractAddress);
+    connect();
   }, [contractAddress]);
 
   return {
@@ -22,30 +23,28 @@ export function useContract(contractAddress) {
     error,
     storage,
     loading,
-    operationsCount,
     connect,
-    increaseOperationsCount,
-    clearError,
+    clearError
   };
 
   function clearError() {
     setError("");
   }
 
-  function increaseOperationsCount() {
-    setOperationsCounter(operationsCount + 1);
-  }
-
   async function connect() {
     if (!contractAddress) {
       return;
     }
+    if (!tezos) {
+      setError("No Tezos provider");
+      return;
+    }
+
     clearError();
     setLoading(true);
     try {
       const contractInstance = await tezos.wallet.at(contractAddress);
       setContract(contractInstance);
-      increaseOperationsCount();
     } catch (err) {
       setError(err.message);
     } finally {

@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
 import { useTezosContext } from "./TezosContext";
 
-export function useBalanceState(address = "", contractOperationsCount = 0) {
+export function useBalanceState(address: string = "") {
   const { tezos } = useTezosContext();
   const [balance, setBalance] = useState(0);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    loadBalance(address);
-  }, [address, contractOperationsCount]);
+    (async () => {
+      await loadBalance(address);
+    })();
+  }, [address]);
 
   return { balance, error, loading, clearError };
 
