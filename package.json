@@ -1,8 +1,31 @@
 {
-  "name": "@tezos-il/tezos-hooks",
-  "version": "1.0.3",
-  "main": "index.js",
+  "name": "@tezos-il/react-hooks",
+  "version": "0.0.1",
+  "browser": "index.js",
   "license": "MIT",
+  "description": "A react library to use tezos in your app",
+  "keywords": [
+    "react",
+    "tezos",
+    "hooks",
+    "taquito",
+    "beacon"
+  ],
+  "homepage": "https://github.com/tezos-israel/tezos-react-hook/",
+  "author": {
+    "email": "chaim@tezos.co.il",
+    "name": "Chaim Lev-Ari"
+  },
+  "contributors": [
+    {
+      "name": "Claude Barde"
+    }
+  ],
+  "bugs": {
+    "email": "chaim@tezos.co.il",
+    "url": "https://github.com/tezos-israel/tezos-react-hook/issues"
+  },
+  "repository": "github:tezos-israel/tezos-react-hooks",
   "peerDependencies": {
     "@taquito/beacon-wallet": "^6.3.5-beta.0",
     "@taquito/taquito": "^6.3.5-beta.0",
