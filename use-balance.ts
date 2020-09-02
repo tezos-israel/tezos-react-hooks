@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useTezosContext } from "./TezosContext";
 
-export function useBalanceState(address: string = "") {
+export function useBalance(address: string = "") {
   const { tezos } = useTezosContext();
-  const [balance, setBalance] = useState(0);
+  const [balance, setBalance] = useState();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -13,10 +13,14 @@ export function useBalanceState(address: string = "") {
     })();
   }, [address]);
 
-  return { balance, error, loading, clearError };
+  return { balance, error, loading, clearError, balanceInTez };
 
   function clearError() {
     setError("");
+  }
+
+  function balanceInTez() {
+    return balance / 10 ** 6;
   }
 
   async function loadBalance(address) {
@@ -26,7 +30,7 @@ export function useBalanceState(address: string = "") {
     try {
       setLoading(true);
       const balance = await tezos.tz.getBalance(address);
-      setBalance(balance / 10 ** 6);
+      setBalance(balance.toNumber());
     } catch (e) {
       setError(e.message);
     } finally {
