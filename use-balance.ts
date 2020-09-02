@@ -5,7 +5,7 @@ import BigNumber from "bignumber.js";
 
 export function useBalance(address: string = ""): BalanceHook {
   const { tezos } = useTezosContext();
-  const [balance, setBalance]: [number, (p: number) => void] = useState();
+  const [balance, setBalance] = useState();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
