@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "claudebarde",
+      "name": "Claude Barde",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/25201109?v=4",
+      "profile": "https://github.com/claudebarde",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "tezos-react-hooks",
+  "projectOwner": "tezos-israel",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
