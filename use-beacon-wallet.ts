@@ -23,7 +23,6 @@ export function useBeaconWallet(): BeaconWalletHook {
     connect,
     error: error,
     loading: loading,
-    initWallet,
     balance: balanceState.balance,
     clearErrors
   };

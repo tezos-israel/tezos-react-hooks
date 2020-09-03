@@ -28,7 +28,6 @@ export interface BeaconWalletHook {
   connect: (options: DAppClientOptions) => void;
   error: string;
   loading: boolean;
-  initWallet: (options: DAppClientOptions) => Promise<string>;
   balance: number;
   clearErrors: () => void;
 }
