@@ -1,6 +1,6 @@
 ## Tezos-hooks
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Provides react hooks for Tezos Taquito (and Beacon)
@@ -15,6 +15,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/claudebarde"><img src="https://avatars3.githubusercontent.com/u/25201109?v=4" width="100px;" alt=""/><br /><sub><b>Claude Barde</b></sub></a><br /><a href="https://github.com/tezos-israel/tezos-react-hooks/commits?author=claudebarde" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/chiptus"><img src="https://avatars3.githubusercontent.com/u/1381655?v=4" width="100px;" alt=""/><br /><sub><b>Chaim Lev-Ari</b></sub></a><br /><a href="https://github.com/tezos-israel/tezos-react-hooks/commits?author=chiptus" title="Code">💻</a></td>
   </tr>
 </table>
 
