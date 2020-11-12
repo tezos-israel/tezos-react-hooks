@@ -1,28 +1,26 @@
-import React, { useContext, useEffect, useState } from "react";
-import { TezosProviderProps, State } from "./types";
-import { Tezos } from "@taquito/taquito";
+import * as React from 'react';
+import { TezosProviderProps, State } from './types';
+import { Tezos } from '@taquito/taquito';
 
 // connects to mainnet by default
-Tezos.setRpcProvider("https://mainnet.smartpy.io");
+Tezos.setRpcProvider('https://mainnet.smartpy.io');
 const defaultState: State = { tezos: Tezos };
 
-export const TezosContext = React.createContext<Partial<State>>(defaultState);
+export const TezosContext = React.createContext<State>(defaultState);
 
-export const useTezosContext = () => useContext(TezosContext);
+export const useTezosContext = () => React.useContext(TezosContext);
 
 export const TezosContextProvider = ({
   tezos,
-  children
+  children,
 }: TezosProviderProps) => {
-  const [state, setState] = useState(defaultState);
+  const [state, setState] = React.useState(defaultState);
 
-  useEffect(() => {
+  React.useEffect(() => {
     setState({ tezos });
   }, [tezos]);
 
-  return (
-    <TezosContext.Provider value={{ ...state }}>
-      {children}
-    </TezosContext.Provider>
-  );
+  const Provider = TezosContext.Provider;
+
+  return <Provider value={{ ...state }}>{children}</Provider>;
 };

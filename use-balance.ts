@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
-import { useTezosContext } from "./TezosContext";
-import { BalanceHook } from "./types";
-import BigNumber from "bignumber.js";
+import { useState, useEffect } from 'react';
+import { useTezosContext } from './TezosContext';
+import { BalanceHook } from './types';
+import BigNumber from 'bignumber.js';
 
-export function useBalance(address: string = ""): BalanceHook {
+export function useBalance(address: string = ''): BalanceHook {
   const { tezos } = useTezosContext();
-  const [balance, setBalance] = useState();
-  const [error, setError] = useState("");
+  const [balance, setBalance] = useState(0);
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export function useBalance(address: string = ""): BalanceHook {
   return { balance, error, loading, clearError, balanceInTez };
 
   function clearError() {
-    setError("");
+    setError('');
   }
 
   function balanceInTez() {

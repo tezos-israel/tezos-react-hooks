@@ -1,7 +1,7 @@
-import { ContractAbstraction, Wallet, TezosToolkit } from "@taquito/taquito";
-import React from "react";
-import { BeaconWallet } from "@taquito/beacon-wallet";
-import { DAppClientOptions } from "@airgap/beacon-sdk";
+import { ContractAbstraction, Wallet, TezosToolkit } from '@taquito/taquito';
+import React from 'react';
+import { BeaconWallet } from '@taquito/beacon-wallet';
+import { DAppClientOptions } from '@airgap/beacon-sdk';
 
 export interface TezosProviderProps {
   tezos: TezosToolkit;
@@ -9,11 +9,11 @@ export interface TezosProviderProps {
 }
 
 export interface State {
-  tezos: TezosToolkit | null;
+  tezos: TezosToolkit;
 }
 
 export interface ContractHook {
-  contract: ContractAbstraction<Wallet>;
+  contract: ContractAbstraction<Wallet> | null;
   error: string;
   storage: any;
   loading: boolean;
@@ -22,7 +22,7 @@ export interface ContractHook {
 }
 
 export interface BeaconWalletHook {
-  wallet: BeaconWallet;
+  wallet: BeaconWallet | null;
   initialized: boolean;
   address: string;
   connect: (options: DAppClientOptions) => void;
