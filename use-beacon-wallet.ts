@@ -1,20 +1,20 @@
-import { useState } from "react";
-import { BeaconWallet } from "@taquito/beacon-wallet";
-import { NetworkType, Network, DAppClientOptions } from "@airgap/beacon-sdk";
-import { TezosToolkit } from "@taquito/taquito";
-import { BeaconWalletHook } from "./types";
+import { useState } from 'react';
+import { BeaconWallet } from '@taquito/beacon-wallet';
+import { NetworkType, Network, DAppClientOptions } from '@airgap/beacon-sdk';
+import { TezosToolkit } from '@taquito/taquito';
+import { BeaconWalletHook } from './types';
 
-import { useTezosContext } from "./TezosContext";
-import { useBalance } from "./use-balance";
+import { useTezosContext } from './TezosContext';
+import { useBalance } from './use-balance';
 
 export function useBeaconWallet(): BeaconWalletHook {
   const { tezos }: { tezos: TezosToolkit } = useTezosContext();
   const [initialized, setInit] = useState(false);
-  const [address, setAddress] = useState<string>();
-  const [error, setError] = useState<string>();
+  const [address, setAddress] = useState('');
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const balanceState = useBalance(address);
-  const [wallet, setWallet] = useState<BeaconWallet>();
+  const [wallet, setWallet] = useState<BeaconWallet | null>(null);
 
   return {
     wallet,
@@ -24,7 +24,7 @@ export function useBeaconWallet(): BeaconWalletHook {
     error: error,
     loading: loading,
     balance: balanceState.balance,
-    clearErrors
+    clearErrors,
   };
 
   async function connect(options: DAppClientOptions) {
@@ -41,7 +41,7 @@ export function useBeaconWallet(): BeaconWalletHook {
   }
 
   function clearErrors() {
-    setError("");
+    setError('');
     balanceState.clearError();
   }
 

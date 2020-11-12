@@ -1,21 +1,19 @@
-import { useState, useEffect } from "react";
-import { useTezosContext } from "./TezosContext";
-import { ContractHook, State } from "./types";
-import { WalletContract } from "@taquito/taquito";
-import { validateAddress } from "@taquito/utils";
+import { useState, useEffect } from 'react';
+import { useTezosContext } from './TezosContext';
+import { ContractHook, State } from './types';
+import { WalletContract } from '@taquito/taquito';
+import { validateAddress } from '@taquito/utils';
 
 export function useContract(
   contractAddress: string,
   refreshInterval?: number
 ): ContractHook {
   const { tezos }: State = useTezosContext();
-  const [contract, setContract] = useState<WalletContract>();
-  const [error, setError] = useState<string>();
-  const [storage, setStorage] = useState();
+  const [contract, setContract] = useState<WalletContract | null>(null);
+  const [error, setError] = useState('');
+  const [storage, setStorage] = useState<any>();
   const [loading, setLoading] = useState(false);
-  const [refreshStorageInterval, setRefreshStorageInterval] = useState(
-    undefined
-  );
+  const [refreshStorageInterval, setRefreshStorageInterval] = useState<any>();
 
   useEffect(() => {
     loadStorage(contract);
@@ -43,16 +41,16 @@ export function useContract(
     storage,
     loading,
     connect,
-    clearError
+    clearError,
   };
 
   function clearError() {
-    setError("");
+    setError('');
   }
 
   async function connect() {
     if (!tezos) {
-      setError("No Tezos provider");
+      setError('No Tezos provider');
       return;
     }
 
@@ -68,13 +66,13 @@ export function useContract(
     }
   }
 
-  async function loadStorage(contract) {
+  async function loadStorage(contract: WalletContract | null) {
     if (!contract) {
       return;
     }
     try {
       setLoading(true);
-      const storage = await contract.storage();
+      const storage: Storage = await contract.storage();
       setStorage(storage);
     } catch (e) {
       setError(e.message);
