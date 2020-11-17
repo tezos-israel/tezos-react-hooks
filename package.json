@@ -1,6 +1,6 @@
 {
   "name": "@tezos-il/tezos-react-hooks",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "browser": "index.js",
   "license": "MIT",
   "description": "A react library to use tezos in your app",
