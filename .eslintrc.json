@@ -18,5 +18,10 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {},
-  "ignorePatterns": ["./lib"]
+  "ignorePatterns": ["./lib"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }

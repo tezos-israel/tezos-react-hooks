@@ -1,5 +1,11 @@
 {
   "compilerOptions": {
+    "declaration": true,
+    "outDir": "./lib", // target for compiled files
+    "module": "es2015",
+    "target": "es2015",
+    "strict": true,
+
     "baseUrl": "./", // relative paths base
     // "paths": {
     //   "@src/*": ["src/*"], // will enable import aliases -> import { ... } from '@src/components'
@@ -7,7 +13,6 @@
     //   "redux": ["typings/redux"], // override library types with your alternative type-definitions in typings folder
     //   "redux-thunk": ["typings/redux-thunk"] // override library types with your alternative type-definitions in typings folder
     // },
-    "outDir": "./lib", // target for compiled files
     "allowSyntheticDefaultImports": true, // no errors with commonjs modules interop
     "esModuleInterop": true, // enable to do "import React ..." instead of "import * as React ..."
     "allowJs": true, // include js files
@@ -18,18 +23,15 @@
     "jsx": "preserve", // preserving JSX
     "lib": ["dom", "es2017"], // you will need to include polyfills for es2017 manually
     "skipLibCheck": true,
-    "target": "es2015", // "es2015" for ES6+ engines
-    "module": "esnext", // "es2015" for tree-shaking
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
-    "strict": true,
     "pretty": true,
     "removeComments": true,
     "sourceMap": true
   },
-  "include": ["./*.ts", "./*.tsx"],
+  "include": ["./src"],
   "exclude": ["node_modules", "**/__tests__/*"]
 }

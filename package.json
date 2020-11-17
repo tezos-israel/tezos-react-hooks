@@ -39,7 +39,9 @@
     "prepare": "yarn build",
     "prepublishOnly": "yarn lint",
     "lint": "eslint ./src",
-    "version": "git add ./src"
+    "preversion": "npm run lint",
+    "version": "git add ./src",
+    "postversion": "git push && git push --tags"
   },
   "devDependencies": {
     "@taquito/beacon-wallet": "^6.3.5-beta.0",
