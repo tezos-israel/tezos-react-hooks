@@ -3,6 +3,8 @@
   "version": "0.0.3",
   "browser": "index.js",
   "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/types.d.ts",
   "description": "A react library to use tezos in your app",
   "keywords": [
     "react",
