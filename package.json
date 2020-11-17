@@ -1,6 +1,6 @@
 {
   "name": "@tezos-il/tezos-react-hooks",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "browser": "index.js",
   "license": "MIT",
   "description": "A react library to use tezos in your app",
@@ -10,6 +10,9 @@
     "hooks",
     "taquito",
     "beacon"
+  ],
+  "files": [
+    "lib/**/*"
   ],
   "homepage": "https://github.com/tezos-israel/tezos-react-hook/",
   "author": {
@@ -32,7 +35,11 @@
     "react": "^16.13.1"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "prepare": "yarn build",
+    "prepublishOnly": "yarn lint",
+    "lint": "eslint ./src",
+    "version": "git add ./src"
   },
   "devDependencies": {
     "@taquito/beacon-wallet": "^6.3.5-beta.0",
