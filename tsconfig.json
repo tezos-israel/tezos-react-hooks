@@ -20,7 +20,7 @@
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true, // importing transpilation helpers from tslib
     "noEmitHelpers": true, // disable inline transpilation helpers in each file
-    "jsx": "preserve", // preserving JSX
+    "jsx": "react", // preserving JSX
     "lib": ["dom", "es2017"], // you will need to include polyfills for es2017 manually
     "skipLibCheck": true,
     "moduleResolution": "node",
