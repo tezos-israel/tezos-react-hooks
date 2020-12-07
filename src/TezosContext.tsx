@@ -15,13 +15,7 @@ export function TezosContextProvider({
   tezos,
   children,
 }: TezosProviderProps): React.ReactElement {
-  const [state, setState] = React.useState(defaultState);
-
-  React.useEffect(() => {
-    setState({ tezos });
-  }, [tezos]);
-
-  const Provider = TezosContext.Provider;
-
-  return <Provider value={{ ...state }}>{children}</Provider>;
+  return (
+    <TezosContext.Provider value={{ tezos }}>{children}</TezosContext.Provider>
+  );
 }
