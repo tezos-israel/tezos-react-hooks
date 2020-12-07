@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { TezosProviderProps, State } from './types';
-import { Tezos } from '@taquito/taquito';
+import { TezosToolkit } from '@taquito/taquito';
 
 // connects to mainnet by default
-Tezos.setRpcProvider('https://mainnet.smartpy.io');
-const defaultState: State = { tezos: Tezos };
+const tezos = new TezosToolkit('https://mainnet.smartpy.io');
+
+const defaultState: State = { tezos };
 
 export const TezosContext = React.createContext<State>(defaultState);
 
