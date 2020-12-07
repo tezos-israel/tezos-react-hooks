@@ -1,6 +1,6 @@
 {
   "name": "@tezos-il/tezos-react-hooks",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "browser": "index.js",
   "license": "MIT",
   "main": "lib/index.js",
