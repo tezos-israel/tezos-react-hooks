@@ -29,6 +29,10 @@ export function useBalance(address = ''): BalanceHook {
     if (!address) {
       return;
     }
+
+    if (!tezos) {
+      throw new Error('Tezos object is undefined');
+    }
     try {
       setLoading(true);
       const balance: BigNumber = await tezos.tz.getBalance(address);

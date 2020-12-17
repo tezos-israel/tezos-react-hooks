@@ -8,7 +8,7 @@ import { useTezosContext } from './TezosContext';
 import { useBalance } from './use-balance';
 
 export function useBeaconWallet(): BeaconWalletHook {
-  const { tezos }: { tezos: TezosToolkit } = useTezosContext();
+  const { tezos }: { tezos?: TezosToolkit } = useTezosContext();
   const [initialized, setInit] = useState(false);
   const [address, setAddress] = useState('');
   const [error, setError] = useState('');
@@ -46,6 +46,10 @@ export function useBeaconWallet(): BeaconWalletHook {
   }
 
   async function initWallet(options: DAppClientOptions): Promise<string> {
+    if (!tezos) {
+      throw new Error('Tezos object is undefined');
+    }
+
     const wallet = new BeaconWallet(options);
     const network: Network = { type: NetworkType.CARTHAGENET };
     await wallet.requestPermissions({ network });

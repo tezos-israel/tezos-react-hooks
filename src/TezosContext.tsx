@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TezosProviderProps, State } from './types';
 
-export const TezosContext = React.createContext<State>({ tezos: null });
+export const TezosContext = React.createContext<State>({});
 
 export const useTezosContext = (): State => React.useContext(TezosContext);
 

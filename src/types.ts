@@ -4,12 +4,12 @@ import { BeaconWallet } from '@taquito/beacon-wallet';
 import { DAppClientOptions } from '@airgap/beacon-sdk';
 
 export interface TezosProviderProps {
-  tezos: TezosToolkit;
+  tezos?: TezosToolkit;
   children: React.ReactNode;
 }
 
 export interface State {
-  tezos: TezosToolkit;
+  tezos?: TezosToolkit;
 }
 
 export interface ContractHook {
