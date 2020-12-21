@@ -2,7 +2,7 @@
   "compilerOptions": {
     "declaration": true,
     "outDir": "./lib", // target for compiled files
-    "module": "es2015",
+    "module": "es2020",
     "target": "es2015",
     "strict": true,
 
