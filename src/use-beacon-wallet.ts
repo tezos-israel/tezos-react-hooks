@@ -25,10 +25,13 @@ export function useBeaconWallet(): BeaconWalletHook {
     clearErrors,
   };
 
-  async function connect(options: any) {
+  async function connect(
+    options: any,
+    network: 'mainnet' | 'delphinet' | 'custom' = 'delphinet'
+  ) {
     try {
       setLoading(true);
-      const address: string = await initWallet(options);
+      const address: string = await initWallet(options, network);
       setInit(true);
       setAddress(address);
     } catch (error) {
@@ -45,7 +48,7 @@ export function useBeaconWallet(): BeaconWalletHook {
 
   async function initWallet(
     options: any,
-    network: 'mainnet' | 'delphinet' | 'custom' = 'delphinet'
+    network: 'mainnet' | 'delphinet' | 'custom'
   ): Promise<string> {
     if (typeof window === 'undefined') {
       throw new Error('Window is undefined');
