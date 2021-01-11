@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { TezosToolkit } from '@taquito/taquito';
-import { BeaconWalletHook } from './types';
 
+import { BeaconWalletHook } from './types';
 import { useTezosContext } from './TezosContext';
 import { useBalance } from './use-balance';
 
@@ -43,7 +43,10 @@ export function useBeaconWallet(): BeaconWalletHook {
     balanceState.clearError();
   }
 
-  async function initWallet(options: any): Promise<string> {
+  async function initWallet(
+    options: any,
+    network: 'mainnet' | 'delphinet' | 'custom' = 'delphinet'
+  ): Promise<string> {
     if (typeof window === 'undefined') {
       throw new Error('Window is undefined');
     }
@@ -52,12 +55,11 @@ export function useBeaconWallet(): BeaconWalletHook {
     }
 
     const { BeaconWallet } = await import('@taquito/beacon-wallet');
-    const { NetworkType } = await import('@airgap/beacon-sdk');
 
     const wallet = new BeaconWallet(options);
 
     await wallet.requestPermissions({
-      network: { type: NetworkType.CARTHAGENET },
+      network: { type: network as any },
     });
     tezos.setWalletProvider(wallet);
     setWallet(wallet);
